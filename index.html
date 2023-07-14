@@ -4,8 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Poke Guess!</title>
+        <link rel="stylesheet" href="src/styles.css">
     </head>
     <body>
-
+        <button id="startButton" onclick="mostrarContenido()">Start</button>
+        <main id="content">
+            <h1>Poke Guess!</h1>
+            <input type="text" id="autocomplete-input" placeholder="Ingrese su texto">
+            <div id="autocomplete-results"></div>
+        </main>
+        <script src="src/scripts.js"></script>
     </body>
 </html>
