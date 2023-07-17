@@ -3,18 +3,49 @@
 }
 
 body{
-    background-color: #ACEB98;
+    background-color: #E6F1F8;
 }
 
-/* Auto complete styles*/
+/* Start button */
+#startButton{
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #00ff00;
+    background-color: #000000;
+}
+
+
+/* Title and input */
+.container {
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Auto complete */
 #autocomplete-results div {
     display: flex;
     align-items: center;
-    background-color: #A4C2A8;
+    background-color: #FFD700;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
+
+#autocomplete-results div:last-child {
+    border-bottom: 1px solid black;
+  }
 
 #autocomplete-results img {
     width: 60px;
     height: 60px;
     margin-right: 10px;
+    background-color: white;
+    border-right: 1px solid black;
 }
