@@ -4,20 +4,15 @@ var pkmonList = "";
 getPdex();
 
 // Functions
-function showContent() {
-  var boton = document.getElementById("startButton");
-  boton.style.display = "none"; // Show start button
-
-  var content = document.getElementById("content");
-  content.style.display = "block"; // Show page content
-}
-
 function getPdex() {
   fetch("https://my-poke-api.onrender.com/")
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
+      // Show page once the client have the data
+      document.getElementById('loading-spinner').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
       apiPdex = data;
       pkmonList = data.map(function (jsonObj) {
         return jsonObj.name;
