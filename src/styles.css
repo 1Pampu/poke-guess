@@ -2,3 +2,19 @@
     display: none;
 }
 
+body{
+    background-color: #ACEB98;
+}
+
+/* Auto complete styles*/
+#autocomplete-results div {
+    display: flex;
+    align-items: center;
+    background-color: #A4C2A8;
+}
+
+#autocomplete-results img {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}

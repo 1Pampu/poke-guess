@@ -1,8 +1,6 @@
 // Global variables and requests
-var apiRandom = "";
 var apiPdex = "";
 var pkmonList = "";
-newRandom();
 getPdex();
 
 // Functions
@@ -12,16 +10,6 @@ function showContent() {
 
   var content = document.getElementById("content");
   content.style.display = "block"; // Show page content
-}
-
-function newRandom() {
-  fetch("https://my-poke-api.onrender.com/random")
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      apiRandom = data;
-    })
 }
 
 function getPdex() {
@@ -44,43 +32,24 @@ document.getElementById("autocomplete-input").addEventListener("input", function
   resultsDiv.innerHTML = "";
 
   if (input.length > 0) {
-    var matchingPkmons = pkmonList.filter(function (pokemon) {
-      return pokemon.toLowerCase().startsWith(input.toLowerCase());
+    var matchingPkmons = apiPdex.filter(function (pokemon) {
+      return pokemon.name.toLowerCase().startsWith(input.toLowerCase());
     });
     matchingPkmons.forEach(pokemon => {
+      var div = document.createElement("div");
+
+      var img = document.createElement("img");
+      img.src = "data:image/png;base64," + pokemon.image; // Decode image
+      div.appendChild(img);
+
       var p = document.createElement("p");
-      p.textContent = pokemon;
-      resultsDiv.appendChild(p);
-    })
+      p.textContent = pokemon.name;
+      div.appendChild(p);
+
+      resultsDiv.appendChild(div);
+    });
   }
 })
 
 
-// // Evento que se activa cuando el contenido del campo de texto cambia
-// document.getElementById("autocomplete-input").addEventListener("input", function () {
-//   var resultsDiv = document.getElementById("autocomplete-results")
-//   var inputText = this.value; // Actual value in the box
-//   resultsDiv.innerHTML = ""  // Remove previus results
-
-//   // Send Request
-//    fetch("https://my-poke-api.onrender.com/pokemon/?name=" + inputText)
-//   //fetch("http://127.0.0.1:8000/pokemon/?name=" + inputText)
-//     .then(function (response) {
-//       if (response.ok) {
-//         return response.json();
-//       }
-//       else {
-//         throw new Error("Pokemon not Found!");
-//       }
-//     })
-//     .then(function (data) {
-//       data.forEach(pokemon => {
-//         var p = document.createElement("p");
-//         p.textContent = pokemon["name"];
-//         resultsDiv.appendChild(p);
-//       });
-//     })
-//     .catch(function (error) {
-//       console.log("Error:", error);
-//     });
-// })
+// TAB INDEX ???
