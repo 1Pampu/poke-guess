@@ -38,7 +38,9 @@ function handleClick() {
   // This function is in charge of coping the anchor p text and paste it in the input when clicked / called
   var input = document.getElementById('autocomplete-input');
   var texto = this.querySelector('.pokeDiv > p').innerText;
-  input.value = texto;
+  var resultsDiv = document.getElementById("autocomplete-results");
+  input.value = texto;  // Set the new value
+  resultsDiv.innerHTML = "";  // Erase the anchors
 }
 
 // Event Listeners
