@@ -43,6 +43,30 @@ function handleClick() {
   resultsDiv.innerHTML = "";  // Erase the anchors
 }
 
+function capitalize(text) {
+  // This function works as in python, capitilezes the string
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+}
+
+function pdexNumberInput() {
+  // This function checks the value in the input and returns the pdex number if it's a valid pokemon, if it's not returns a null
+  var input = document.getElementById('autocomplete-input');
+  var isInList = pkmonList.map(function(str){
+    return str.toLowerCase();
+  }).includes(input.value.toLowerCase());
+
+  if (isInList){
+    var pkmonDictionary = apiPdex.find(function(dic) {
+      return dic.name === capitalize(input.value);
+  });
+    var pkdexNumber = pkmonDictionary.pokedex_number;
+    return pkdexNumber
+  }
+  else{
+    return null
+  }
+}
+
 // Event Listeners
 document.getElementById("autocomplete-input").addEventListener("input", function () {
   // This event Listener updates the pokemon list when it register a change in the input
@@ -75,5 +99,24 @@ document.getElementById("autocomplete-input").addEventListener("input", function
     });
   }
 })
+
+document.getElementById("submitBtn").addEventListener('click', function(){
+  pNum = pdexNumberInput();
+  if (pNum != null){
+    var data = {"pokedex_number":pdexNumberInput()}
+    fetch("https://my-poke-api.onrender.com/answer",{method: "POST", headers:{"Content-Type":"application/json"},body: JSON.stringify(data)})
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      console.log(data); // print json in console
+    })
+  }
+  else{
+    // implement adding a p with a warning like "That's not a valid pokemon"
+  }
+})
+
+
 
 // TAB INDEX ???
