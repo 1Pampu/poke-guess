@@ -45,25 +45,114 @@ function handleClick() {
 
 function capitalize(text) {
   // This function works as in python, capitilezes the string
-  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  return text.replace(/(^|\s)\S/g, (match) => match.toUpperCase());
 }
 
 function pdexNumberInput() {
   // This function checks the value in the input and returns the pdex number if it's a valid pokemon, if it's not returns a null
   var input = document.getElementById('autocomplete-input');
-  var isInList = pkmonList.map(function(str){
+  var isInList = pkmonList.map(function (str) {
     return str.toLowerCase();
   }).includes(input.value.toLowerCase());
 
-  if (isInList){
-    var pkmonDictionary = apiPdex.find(function(dic) {
+  if (isInList) {
+    var pkmonDictionary = apiPdex.find(function (dic) {
       return dic.name === capitalize(input.value);
-  });
+    });
     var pkdexNumber = pkmonDictionary.pokedex_number;
     return pkdexNumber
   }
-  else{
+  else {
     return null
+  }
+}
+
+function getPokemonDictionary(pokedexNumber, apiPdex) {
+  for (let i = 0; i < apiPdex.length; i++) {
+    if (apiPdex[i].pokedex_number === pokedexNumber) {
+      return apiPdex[i];
+    }
+  }
+}
+
+function postRequest() {
+  // Function to submit the post request to the server
+  pNum = pdexNumberInput();
+  if (pNum != null) {
+    var data = { "pokedex_number": pdexNumberInput() }
+    fetch("https://my-poke-api.onrender.com/answer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data); // print json in console
+        var pokemon = getPokemonDictionary(pNum, apiPdex);
+        var divContainer = document.createElement("div");
+
+        // Pokemon Image
+        var divImage = document.createElement("div");
+        divImage.classList.add("box");
+        var img = document.createElement("img");
+        img.src = "data:image/png;base64," + pokemon.image; // Decode image
+        divImage.appendChild(img);
+        divContainer.appendChild(divImage);
+
+        // Pokedex Number
+        var divPkdexnumber = document.createElement("div");
+        divPkdexnumber.classList.add("box", data.pokedex_number);
+        var pPkdexnumber = document.createElement("p");
+        pPkdexnumber.textContent = pokemon.pokedex_number;
+        divPkdexnumber.appendChild(pPkdexnumber);
+        divContainer.appendChild(divPkdexnumber);
+
+        // Type 1
+        var divType1 = document.createElement("div");
+        divType1.classList.add("box", data.type1);
+        var pType1 = document.createElement("p");
+        pType1.textContent = pokemon.type1;
+        divType1.appendChild(pType1);
+        divContainer.appendChild(divType1);
+
+        // Type 2
+        var divType2 = document.createElement("div");
+        divType2.classList.add("box", data.type2);
+        var pType2 = document.createElement("p");
+        pType2.textContent = pokemon.type2;
+        divType2.appendChild(pType2);
+        divContainer.appendChild(divType2);
+
+        // Height
+        var divHeight = document.createElement("div");
+        divHeight.classList.add("box",data.height_m);
+        var pHeight = document.createElement("p");
+        pHeight.textContent = pokemon.height_m + "m";
+        divHeight.appendChild(pHeight);
+        divContainer.appendChild(divHeight);
+
+        // Weight
+        var divWeight = document.createElement("div");
+        divWeight.classList.add("box",data.weight_kg);
+        var pWeight = document.createElement("p");
+        pWeight.textContent = pokemon.weight_kg + "Kg";
+        divWeight.appendChild(pWeight);
+        divContainer.appendChild(divWeight);
+
+        // Legendary
+        var divLegendary = document.createElement("div");
+        divLegendary.classList.add("box",data.is_legendary);
+        var pLegendary = document.createElement("p");
+        if (pokemon.is_legendary == 0){pLegendary.textContent = "No"}
+        else{pLegendary.textContent = "Yes"}
+        divLegendary.appendChild(pLegendary);
+        divContainer.appendChild(divLegendary);
+
+        // Append all
+        var answersDiv = document.getElementById("answers");
+        answersDiv.appendChild(divContainer);
+      })
+  }
+  else {
+    // implement adding a p with a warning like "That's not a valid pokemon"
   }
 }
 
@@ -95,28 +184,16 @@ document.getElementById("autocomplete-input").addEventListener("input", function
 
       anchor.appendChild(div);
       resultsDiv.appendChild(anchor);
-      updateAnchorEventListeners()
+      updateAnchorEventListeners();
     });
   }
 })
 
-document.getElementById("submitBtn").addEventListener('click', function(){
-  pNum = pdexNumberInput();
-  if (pNum != null){
-    var data = {"pokedex_number":pdexNumberInput()}
-    fetch("https://my-poke-api.onrender.com/answer",{method: "POST", headers:{"Content-Type":"application/json"},body: JSON.stringify(data)})
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      console.log(data); // print json in console
-    })
-  }
-  else{
-    // implement adding a p with a warning like "That's not a valid pokemon"
+document.getElementById("submitBtn").addEventListener('click', postRequest)
+document.getElementById("autocomplete-input").addEventListener("keyup", function (event) {
+  if (event.keyCode === 13) {
+    var resultsDiv = document.getElementById("autocomplete-results");
+    resultsDiv.innerHTML = "";
+    postRequest();
   }
 })
-
-
-
-// TAB INDEX ???
