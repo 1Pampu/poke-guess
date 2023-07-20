@@ -85,9 +85,9 @@ function postRequest() {
         return response.json();
       })
       .then(function (data) {
-        console.log(data); // print json in console
         var pokemon = getPokemonDictionary(pNum, apiPdex);
         var divContainer = document.createElement("div");
+        divContainer.classList.add("my-answer");
 
         // Pokemon Image
         var divImage = document.createElement("div");
@@ -109,7 +109,7 @@ function postRequest() {
         var divType1 = document.createElement("div");
         divType1.classList.add("box", data.type1);
         var pType1 = document.createElement("p");
-        pType1.textContent = pokemon.type1;
+        pType1.textContent = capitalize(pokemon.type1);
         divType1.appendChild(pType1);
         divContainer.appendChild(divType1);
 
@@ -117,7 +117,7 @@ function postRequest() {
         var divType2 = document.createElement("div");
         divType2.classList.add("box", data.type2);
         var pType2 = document.createElement("p");
-        pType2.textContent = pokemon.type2;
+        pType2.textContent = capitalize(pokemon.type2);
         divType2.appendChild(pType2);
         divContainer.appendChild(divType2);
 
@@ -149,6 +149,10 @@ function postRequest() {
         // Append all
         var answersDiv = document.getElementById("answers");
         answersDiv.appendChild(divContainer);
+
+        // Remove input
+        var input = document.getElementById("autocomplete-input");
+        input.value = "";
       })
   }
   else {

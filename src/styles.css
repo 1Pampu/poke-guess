@@ -73,12 +73,12 @@ button {
     cursor: pointer;
 }
 
-button img{
+button img {
     width: 30px;
     height: 30px;
 }
 
-#autocomplete-input{
+#autocomplete-input {
     width: 215px;
     height: 30px;
     font-size: large;
@@ -87,7 +87,7 @@ button img{
 
 /* Auto complete */
 #autocomplete-results {
-    position: fixed;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
@@ -133,4 +133,65 @@ button img{
     cursor: pointer;
 }
 
-/* clip-path: polygon(97% 40%,80% 40%,80% 95%,20% 95%,20% 40%,3% 40%,50% 5%); */
+/* Answers */
+.my-answer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.box {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #000;
+    margin: 3px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.box p{
+    color: white;
+    z-index: 2;
+}
+
+.my-answer div img {
+    max-width: 100%;
+}
+
+.true{
+    background-color: green;
+}
+
+.false{
+    background-color: rgb(213, 61, 61);
+}
+
+.higher{
+    background-color: rgb(213, 61, 61);
+}
+
+.higher::after{
+    position: absolute;
+    width: 100%;
+    clip-path: polygon(97% 40%,80% 40%,80% 95%,20% 95%,20% 40%,3% 40%,50% 5%);
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    content: "";
+}
+
+.lower{
+    background-color: rgb(213, 61, 61);
+}
+
+.lower::after{
+    position: absolute;
+    width: 100%;
+    clip-path: polygon(97% 60%,80% 60%,80% 5%,20% 5%,20% 60%,3% 60%,50% 95%);
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    content: "";
+    z-index: 1;
+}
