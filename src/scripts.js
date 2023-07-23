@@ -123,7 +123,7 @@ function postRequest() {
 
         // Height
         var divHeight = document.createElement("div");
-        divHeight.classList.add("box",data.height_m);
+        divHeight.classList.add("box", data.height_m);
         var pHeight = document.createElement("p");
         pHeight.textContent = pokemon.height_m + "m";
         divHeight.appendChild(pHeight);
@@ -131,7 +131,7 @@ function postRequest() {
 
         // Weight
         var divWeight = document.createElement("div");
-        divWeight.classList.add("box",data.weight_kg);
+        divWeight.classList.add("box", data.weight_kg);
         var pWeight = document.createElement("p");
         pWeight.textContent = pokemon.weight_kg + "Kg";
         divWeight.appendChild(pWeight);
@@ -139,10 +139,10 @@ function postRequest() {
 
         // Legendary
         var divLegendary = document.createElement("div");
-        divLegendary.classList.add("box",data.is_legendary);
+        divLegendary.classList.add("box", data.is_legendary);
         var pLegendary = document.createElement("p");
-        if (pokemon.is_legendary == 0){pLegendary.textContent = "No"}
-        else{pLegendary.textContent = "Yes"}
+        if (pokemon.is_legendary == 0) { pLegendary.textContent = "No" }
+        else { pLegendary.textContent = "Yes" }
         divLegendary.appendChild(pLegendary);
         divContainer.appendChild(divLegendary);
 
@@ -155,9 +155,25 @@ function postRequest() {
         input.value = "";
       })
   }
-  else {
-    // implement adding a p with a warning like "That's not a valid pokemon"
-  }
+}
+
+function countDown(timeRemaining) {
+  var timerElement = document.getElementById("timer");
+
+  var loop = setInterval(() => {
+    if (timeRemaining <= 0) {
+      clearInterval(loop);
+      timerElement.innerHTML = "Reloading Page!"
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } else {
+      var minutes = Math.floor(timeRemaining / 60);
+      var seconds = timeRemaining % 60;
+      timerElement.innerHTML = `Next Pokemon in ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`
+    }
+    timeRemaining--;
+  }, 1000);
 }
 
 // Event Listeners
@@ -194,10 +210,47 @@ document.getElementById("autocomplete-input").addEventListener("input", function
 })
 
 document.getElementById("submitBtn").addEventListener('click', postRequest)
+// Event listener triggered when clicking the send button
+
 document.getElementById("autocomplete-input").addEventListener("keyup", function (event) {
+  // Event listener triggered when pressing enter in the input
   if (event.keyCode === 13) {
     var resultsDiv = document.getElementById("autocomplete-results");
     resultsDiv.innerHTML = "";
     postRequest();
   }
 })
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Event listener that runs when the page is loaded
+  fetch("https://my-poke-api.onrender.com/time")
+    .then(response => response.json())
+    .then(data => {
+      // Obtener la hora actual del cliente en formato UTC
+      const nowUtc = new Date();
+
+      // Obtener la respuesta del servidor (asumiendo que se obtiene en una variable llamada "response" en formato ISO 8601 con "Z")
+      const serverTimeStr = data.nextPokemon;
+
+      // Extraer los componentes de la fecha y hora del servidor
+      const year = parseInt(serverTimeStr.slice(0, 4));
+      const month = parseInt(serverTimeStr.slice(5, 7)) - 1; // Meses en JavaScript son 0-indexados (0-11)
+      const day = parseInt(serverTimeStr.slice(8, 10));
+      const hour = parseInt(serverTimeStr.slice(11, 13));
+      const minute = parseInt(serverTimeStr.slice(14, 16));
+      const second = parseInt(serverTimeStr.slice(17, 19));
+
+      // Crear el objeto Date representando la hora del servidor en UTC
+      const serverTime = new Date(Date.UTC(year, month, day, hour, minute, second));
+
+      // Calcular la diferencia de tiempo en milisegundos
+      const timeDifferenceMs = serverTime - nowUtc;
+
+      // Convertir la diferencia de tiempo a segundos
+      const timeDifferenceSeconds = timeDifferenceMs / 1000;
+
+      countDown(timeDifferenceSeconds)
+    })
+});
+
+// TODO: REMOVE SELECTED POKEMONS, END WHEN YOU GOT THE RIGHT ANSWER, FIX WHITE LETTERS,
