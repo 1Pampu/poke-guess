@@ -169,7 +169,7 @@ function countDown(timeRemaining) {
       }, 2000);
     } else {
       var minutes = Math.floor(timeRemaining / 60);
-      var seconds = timeRemaining % 60;
+      var seconds = Math.floor(timeRemaining % 60);
       timerElement.innerHTML = `Next Pokemon in ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`
     }
     timeRemaining--;
@@ -226,30 +226,28 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("https://my-poke-api.onrender.com/time")
     .then(response => response.json())
     .then(data => {
-      // Obtener la hora actual del cliente en formato UTC
+      // Get Actual time in UTC
       const nowUtc = new Date();
-
-      // Obtener la respuesta del servidor (asumiendo que se obtiene en una variable llamada "response" en formato ISO 8601 con "Z")
+      // Get the str that the server returns
       const serverTimeStr = data.nextPokemon;
 
-      // Extraer los componentes de la fecha y hora del servidor
+      // Extract compenents to create te Date time
       const year = parseInt(serverTimeStr.slice(0, 4));
-      const month = parseInt(serverTimeStr.slice(5, 7)) - 1; // Meses en JavaScript son 0-indexados (0-11)
+      const month = parseInt(serverTimeStr.slice(5, 7)) - 1;
       const day = parseInt(serverTimeStr.slice(8, 10));
       const hour = parseInt(serverTimeStr.slice(11, 13));
       const minute = parseInt(serverTimeStr.slice(14, 16));
       const second = parseInt(serverTimeStr.slice(17, 19));
 
-      // Crear el objeto Date representando la hora del servidor en UTC
+      // Create UTC time
       const serverTime = new Date(Date.UTC(year, month, day, hour, minute, second));
 
-      // Calcular la diferencia de tiempo en milisegundos
+      // Time to new pokemon
       const timeDifferenceMs = serverTime - nowUtc;
 
-      // Convertir la diferencia de tiempo a segundos
+      // Difference in seconds
       const timeDifferenceSeconds = timeDifferenceMs / 1000;
-
-      countDown(timeDifferenceSeconds)
+      countDown(timeDifferenceSeconds);
     })
 });
 

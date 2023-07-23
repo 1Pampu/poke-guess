@@ -140,6 +140,14 @@ button img {
     justify-content: center;
 }
 
+.my-answer:first-child .box{
+    border: 0px solid transparent;
+}
+
+.my-answer:first-child p{
+    color: black;
+}
+
 .box {
     width: 60px;
     height: 60px;
