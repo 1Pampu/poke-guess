@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Tektur&display=swap');
+
 #content {
     display: none;
 }
@@ -58,6 +60,10 @@ body {
 /* Title and input */
 .container {
     text-align: center;
+}
+
+#pokeGuessImg{
+    width: 450px;
 }
 
 .input-container {
@@ -202,4 +208,11 @@ button img {
     background: rgba(0,0,0,.5);
     content: "";
     z-index: 1;
+}
+
+
+/*Timer  */ 
+
+h3{
+    font-family: 'Tektur', cursive;
 }
