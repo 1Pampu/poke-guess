@@ -68,6 +68,7 @@ function pdexNumberInput() {
 }
 
 function getPokemonDictionary(pokedexNumber, apiPdex) {
+  // This function returns the pokemon dictionary, needs a pokedes number and de list of dictionaries
   for (let i = 0; i < apiPdex.length; i++) {
     if (apiPdex[i].pokedex_number === pokedexNumber) {
       return apiPdex[i];
@@ -90,6 +91,8 @@ function postRequest() {
           var divContainer = document.createElement("div");
           divContainer.classList.add("my-answer");
 
+          var checkList = []
+
           // Pokemon Image
           var divImage = document.createElement("div");
           divImage.classList.add("box");
@@ -105,6 +108,7 @@ function postRequest() {
           pPkdexnumber.textContent = pokemon.pokedex_number;
           divPkdexnumber.appendChild(pPkdexnumber);
           divContainer.appendChild(divPkdexnumber);
+          checkList.push(data.pokedex_number);
 
           // Type 1
           var divType1 = document.createElement("div");
@@ -113,6 +117,7 @@ function postRequest() {
           pType1.textContent = capitalize(pokemon.type1);
           divType1.appendChild(pType1);
           divContainer.appendChild(divType1);
+          checkList.push(data.type1);
 
           // Type 2
           var divType2 = document.createElement("div");
@@ -121,6 +126,7 @@ function postRequest() {
           pType2.textContent = capitalize(pokemon.type2);
           divType2.appendChild(pType2);
           divContainer.appendChild(divType2);
+          checkList.push(data.type2);
 
           // Height
           var divHeight = document.createElement("div");
@@ -129,6 +135,7 @@ function postRequest() {
           pHeight.textContent = pokemon.height_m + "m";
           divHeight.appendChild(pHeight);
           divContainer.appendChild(divHeight);
+          checkList.push(data.height_m);
 
           // Weight
           var divWeight = document.createElement("div");
@@ -137,6 +144,7 @@ function postRequest() {
           pWeight.textContent = pokemon.weight_kg + "Kg";
           divWeight.appendChild(pWeight);
           divContainer.appendChild(divWeight);
+          checkList.push(data.weight_kg);
 
           // Legendary
           var divLegendary = document.createElement("div");
@@ -146,6 +154,7 @@ function postRequest() {
           else { pLegendary.textContent = "Yes" }
           divLegendary.appendChild(pLegendary);
           divContainer.appendChild(divLegendary);
+          checkList.push(data.is_legendary);
 
           // Append all
           var answersDiv = document.getElementById("answers");
@@ -160,11 +169,29 @@ function postRequest() {
           pkmonList.splice(index,1);
           index = apiPdex.findIndex(item => item.name === pokemon.name);
           apiPdex.splice(index,1);
+
+          isWinner(checkList);
         })
   }
 }
 
+function isWinner(list){
+  // this function checks if the list of answers are all true in that case is the correct answer
+  var allTrue = true;
+  for(var i = 0; i<list.length; i++){
+    if (list[i] !== true){
+      allTrue = false;
+      break;
+    }
+  }
+  if (allTrue){ // This is the winner
+    var input = document.getElementById("autocomplete-input");
+    input.disabled = true;
+  }
+}
+
 function countDown(timeRemaining) {
+  // this function updates the timer
   var timerElement = document.getElementById("timer");
 
   var loop = setInterval(() => {
@@ -257,5 +284,3 @@ document.addEventListener("DOMContentLoaded", () => {
       countDown(timeDifferenceSeconds);
     })
 });
-
-// TODO: END WHEN YOU GOT THE RIGHT ANSWER
