@@ -211,8 +211,27 @@ button img {
 }
 
 
-/*Timer  */ 
+/*Timer  */
 
 h3{
     font-family: 'Tektur', cursive;
 }
+
+/* Responsive */
+@media (max-width: 479px) {
+    p{
+        font-size: xx-small;
+    }
+
+    .pokeDiv p {
+        font-size: medium;
+    }
+    #pokeGuessImg{
+        width: 250px;
+    }
+
+    .box {
+        width: 35px;
+        height: 35px;
+    }
+  }
