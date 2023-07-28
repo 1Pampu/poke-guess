@@ -66,6 +66,13 @@ body {
     width: 450px;
 }
 
+#warning{
+    font-size: smaller;
+    margin-bottom: 1px;
+    color:red;
+    margin-top: 0;
+}
+
 .input-container {
     display: flex;
     justify-content: center;

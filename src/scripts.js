@@ -284,3 +284,5 @@ document.addEventListener("DOMContentLoaded", () => {
       countDown(timeDifferenceSeconds);
     })
 });
+
+// TODO: Winner popout, do not reset when reload, save how many tries did it take, footer with github and more
