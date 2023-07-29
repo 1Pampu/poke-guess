@@ -224,6 +224,20 @@ h3{
     font-family: 'Tektur', cursive;
 }
 
+.winner-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f8d95a;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 24px;
+    text-align: center;
+    z-index: 9999;
+  }
+
 /* Responsive */
 @media (max-width: 479px) {
     p{

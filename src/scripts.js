@@ -187,7 +187,17 @@ function isWinner(list){
   if (allTrue){ // This is the winner
     var input = document.getElementById("autocomplete-input");
     input.disabled = true;
+    showWinnerMessage();
   }
+}
+
+function showWinnerMessage() {
+  var message = document.createElement("div");
+  message.className = "winner-message";
+  message.textContent = "Winner!";
+
+  document.body.appendChild(message);
+  message.style.display = "block";
 }
 
 function countDown(timeRemaining) {
