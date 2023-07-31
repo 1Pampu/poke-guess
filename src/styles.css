@@ -62,14 +62,14 @@ body {
     text-align: center;
 }
 
-#pokeGuessImg{
+#pokeGuessImg {
     width: 450px;
 }
 
-#warning{
+#warning {
     font-size: smaller;
     margin-bottom: 1px;
-    color:red;
+    color: red;
     margin-top: 0;
 }
 
@@ -153,11 +153,11 @@ button img {
     justify-content: center;
 }
 
-.my-answer:first-child .box{
+.my-answer:first-child .box {
     border: 0px solid transparent;
 }
 
-.my-answer:first-child p{
+.my-answer:first-child p {
     color: black;
 }
 
@@ -173,7 +173,7 @@ button img {
     position: relative;
 }
 
-.box p{
+.box p {
     color: white;
     z-index: 2;
 }
@@ -182,37 +182,37 @@ button img {
     max-width: 115%;
 }
 
-.true{
+.true {
     background-color: green;
 }
 
-.false{
+.false {
     background-color: rgb(213, 61, 61);
 }
 
-.higher{
+.higher {
     background-color: rgb(213, 61, 61);
 }
 
-.higher::after{
+.higher::after {
     position: absolute;
     width: 100%;
-    clip-path: polygon(97% 40%,80% 40%,80% 95%,20% 95%,20% 40%,3% 40%,50% 5%);
+    clip-path: polygon(97% 40%, 80% 40%, 80% 95%, 20% 95%, 20% 40%, 3% 40%, 50% 5%);
     height: 100%;
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
     content: "";
 }
 
-.lower{
+.lower {
     background-color: rgb(213, 61, 61);
 }
 
-.lower::after{
+.lower::after {
     position: absolute;
     width: 100%;
-    clip-path: polygon(97% 60%,80% 60%,80% 5%,20% 5%,20% 60%,3% 60%,50% 95%);
+    clip-path: polygon(97% 60%, 80% 60%, 80% 5%, 20% 5%, 20% 60%, 3% 60%, 50% 95%);
     height: 100%;
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
     content: "";
     z-index: 1;
 }
@@ -220,8 +220,9 @@ button img {
 
 /*Timer  */
 
-h3{
+h3 {
     font-family: 'Tektur', cursive;
+    margin-bottom: 65px;
 }
 
 .winner-message {
@@ -236,18 +237,46 @@ h3{
     font-size: 24px;
     text-align: center;
     z-index: 9999;
-  }
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    background-color: #89bdf8;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 9999;
+}
+
+footer a {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+footer a i {
+    transition: transform 0.2s ease-in-out;
+}
+
+footer a i:hover {
+    transform: scale(1.3);
+}
 
 /* Responsive */
 @media (max-width: 479px) {
-    p{
+    p {
         font-size: xx-small;
     }
 
     .pokeDiv p {
         font-size: medium;
     }
-    #pokeGuessImg{
+
+    #pokeGuessImg {
         width: 250px;
     }
 
@@ -255,4 +284,4 @@ h3{
         width: 35px;
         height: 35px;
     }
-  }
+}
