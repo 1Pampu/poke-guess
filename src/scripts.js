@@ -95,15 +95,18 @@ function postRequest() {
 
           // Pokemon Image
           var divImage = document.createElement("div");
-          divImage.classList.add("box");
+          divImage.classList.add("box","answer");
+          divImage.style.animationDelay = "0s";
           var img = document.createElement("img");
           img.src = "data:image/png;base64," + pokemon.image; // Decode image
+          img.title = pokemon.name;
           divImage.appendChild(img);
           divContainer.appendChild(divImage);
 
           // Pokedex Number
           var divPkdexnumber = document.createElement("div");
-          divPkdexnumber.classList.add("box", data.pokedex_number);
+          divPkdexnumber.classList.add("box", data.pokedex_number,"answer");
+          divPkdexnumber.style.animationDelay = "0.5s";
           var pPkdexnumber = document.createElement("p");
           pPkdexnumber.textContent = pokemon.pokedex_number;
           divPkdexnumber.appendChild(pPkdexnumber);
@@ -112,7 +115,8 @@ function postRequest() {
 
           // Type 1
           var divType1 = document.createElement("div");
-          divType1.classList.add("box", data.type1);
+          divType1.classList.add("box", data.type1,"answer");
+          divType1.style.animationDelay = "1s";
           var pType1 = document.createElement("p");
           pType1.textContent = capitalize(pokemon.type1);
           divType1.appendChild(pType1);
@@ -121,7 +125,8 @@ function postRequest() {
 
           // Type 2
           var divType2 = document.createElement("div");
-          divType2.classList.add("box", data.type2);
+          divType2.classList.add("box", data.type2,"answer");
+          divType2.style.animationDelay = "1.5s";
           var pType2 = document.createElement("p");
           pType2.textContent = capitalize(pokemon.type2);
           divType2.appendChild(pType2);
@@ -130,7 +135,8 @@ function postRequest() {
 
           // Height
           var divHeight = document.createElement("div");
-          divHeight.classList.add("box", data.height_m);
+          divHeight.classList.add("box", data.height_m,"answer");
+          divHeight.style.animationDelay = "2s";
           var pHeight = document.createElement("p");
           pHeight.textContent = pokemon.height_m + "m";
           divHeight.appendChild(pHeight);
@@ -139,7 +145,8 @@ function postRequest() {
 
           // Weight
           var divWeight = document.createElement("div");
-          divWeight.classList.add("box", data.weight_kg);
+          divWeight.classList.add("box", data.weight_kg,"answer");
+          divWeight.style.animationDelay = "2.5s";
           var pWeight = document.createElement("p");
           pWeight.textContent = pokemon.weight_kg + "Kg";
           divWeight.appendChild(pWeight);
@@ -148,7 +155,8 @@ function postRequest() {
 
           // Legendary
           var divLegendary = document.createElement("div");
-          divLegendary.classList.add("box", data.is_legendary);
+          divLegendary.classList.add("box", data.is_legendary,"answer");
+          divLegendary.style.animationDelay = "3s";
           var pLegendary = document.createElement("p");
           if (pokemon.is_legendary == 0) { pLegendary.textContent = "No" }
           else { pLegendary.textContent = "Yes" }
@@ -158,7 +166,9 @@ function postRequest() {
 
           // Append all
           var answersDiv = document.getElementById("answers");
-          answersDiv.appendChild(divContainer);
+          // answersDiv.appendChild(divContainer);
+          var firstChild = answersDiv.firstElementChild;
+          answersDiv.insertBefore(divContainer,firstChild.nextSibling)
 
           // Remove input
           var input = document.getElementById("autocomplete-input");
@@ -295,4 +305,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 });
 
-// TODO: Winner popout, do not reset when reload, save how many tries did it take, footer with github and more
+// TODO: Winner popout (BETTER),Winner popout wait to show until the respose is given, do not reset when reload, save how many tries did it take,

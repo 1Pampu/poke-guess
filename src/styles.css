@@ -173,6 +173,11 @@ button img {
     position: relative;
 }
 
+.box.answer{
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
 .box p {
     color: white;
     z-index: 2;
@@ -217,6 +222,11 @@ button img {
     z-index: 1;
 }
 
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
 
 /*Timer  */
 
