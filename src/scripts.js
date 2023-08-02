@@ -202,12 +202,17 @@ function isWinner(list){
 }
 
 function showWinnerMessage() {
-  var message = document.createElement("div");
-  message.className = "winner-message";
-  message.textContent = "Winner!";
+  /* This function Activates the winner popout after 3.75 seconds*/
+  var message = document.getElementById("winner-message");
+  setTimeout(function() {
+    message.style.display = "block";
+  }, 3750);
 
-  document.body.appendChild(message);
-  message.style.display = "block";
+}
+
+function closePopup() {
+  /* This function closes the winner popout */
+  document.getElementById("winner-message").style.display = 'none';
 }
 
 function countDown(timeRemaining) {
