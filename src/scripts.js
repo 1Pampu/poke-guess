@@ -1,6 +1,8 @@
 // Global variables and requests
 var apiPdex = "";
 var pkmonList = "";
+var lastPokemon = "";
+getLastPokemon()
 getPdex();
 
 // Functions
@@ -18,6 +20,17 @@ function getPdex() {
       pkmonList = data.map(function (jsonObj) {
         return jsonObj.name;
       });
+    })
+}
+
+function getLastPokemon() {
+  // This function make a request to the server and gets the previus answer
+  fetch("https://my-poke-api.onrender.com/lastGuess")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      lastPokemon = data.pokemon
     })
 }
 
@@ -83,118 +96,118 @@ function postRequest() {
     var pokemon = getPokemonDictionary(pNum, apiPdex);
     if (pkmonList.includes(pokemon.name))
       var data = { "pokedex_number": pdexNumberInput() }
-      fetch("https://my-poke-api.onrender.com/answer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          var divContainer = document.createElement("div");
-          divContainer.classList.add("my-answer");
+    fetch("https://my-poke-api.onrender.com/answer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        var divContainer = document.createElement("div");
+        divContainer.classList.add("my-answer");
 
-          var checkList = []
+        var checkList = []
 
-          // Pokemon Image
-          var divImage = document.createElement("div");
-          divImage.classList.add("box","answer");
-          divImage.style.animationDelay = "0s";
-          var img = document.createElement("img");
-          img.src = "data:image/png;base64," + pokemon.image; // Decode image
-          img.title = pokemon.name;
-          divImage.appendChild(img);
-          divContainer.appendChild(divImage);
+        // Pokemon Image
+        var divImage = document.createElement("div");
+        divImage.classList.add("box", "answer");
+        divImage.style.animationDelay = "0s";
+        var img = document.createElement("img");
+        img.src = "data:image/png;base64," + pokemon.image; // Decode image
+        img.title = pokemon.name;
+        divImage.appendChild(img);
+        divContainer.appendChild(divImage);
 
-          // Pokedex Number
-          var divPkdexnumber = document.createElement("div");
-          divPkdexnumber.classList.add("box", data.pokedex_number,"answer");
-          divPkdexnumber.style.animationDelay = "0.5s";
-          var pPkdexnumber = document.createElement("p");
-          pPkdexnumber.textContent = pokemon.pokedex_number;
-          divPkdexnumber.appendChild(pPkdexnumber);
-          divContainer.appendChild(divPkdexnumber);
-          checkList.push(data.pokedex_number);
+        // Pokedex Number
+        var divPkdexnumber = document.createElement("div");
+        divPkdexnumber.classList.add("box", data.pokedex_number, "answer");
+        divPkdexnumber.style.animationDelay = "0.5s";
+        var pPkdexnumber = document.createElement("p");
+        pPkdexnumber.textContent = pokemon.pokedex_number;
+        divPkdexnumber.appendChild(pPkdexnumber);
+        divContainer.appendChild(divPkdexnumber);
+        checkList.push(data.pokedex_number);
 
-          // Type 1
-          var divType1 = document.createElement("div");
-          divType1.classList.add("box", data.type1,"answer");
-          divType1.style.animationDelay = "1s";
-          var pType1 = document.createElement("p");
-          pType1.textContent = capitalize(pokemon.type1);
-          divType1.appendChild(pType1);
-          divContainer.appendChild(divType1);
-          checkList.push(data.type1);
+        // Type 1
+        var divType1 = document.createElement("div");
+        divType1.classList.add("box", data.type1, "answer");
+        divType1.style.animationDelay = "1s";
+        var pType1 = document.createElement("p");
+        pType1.textContent = capitalize(pokemon.type1);
+        divType1.appendChild(pType1);
+        divContainer.appendChild(divType1);
+        checkList.push(data.type1);
 
-          // Type 2
-          var divType2 = document.createElement("div");
-          divType2.classList.add("box", data.type2,"answer");
-          divType2.style.animationDelay = "1.5s";
-          var pType2 = document.createElement("p");
-          pType2.textContent = capitalize(pokemon.type2);
-          divType2.appendChild(pType2);
-          divContainer.appendChild(divType2);
-          checkList.push(data.type2);
+        // Type 2
+        var divType2 = document.createElement("div");
+        divType2.classList.add("box", data.type2, "answer");
+        divType2.style.animationDelay = "1.5s";
+        var pType2 = document.createElement("p");
+        pType2.textContent = capitalize(pokemon.type2);
+        divType2.appendChild(pType2);
+        divContainer.appendChild(divType2);
+        checkList.push(data.type2);
 
-          // Height
-          var divHeight = document.createElement("div");
-          divHeight.classList.add("box", data.height_m,"answer");
-          divHeight.style.animationDelay = "2s";
-          var pHeight = document.createElement("p");
-          pHeight.textContent = pokemon.height_m + "m";
-          divHeight.appendChild(pHeight);
-          divContainer.appendChild(divHeight);
-          checkList.push(data.height_m);
+        // Height
+        var divHeight = document.createElement("div");
+        divHeight.classList.add("box", data.height_m, "answer");
+        divHeight.style.animationDelay = "2s";
+        var pHeight = document.createElement("p");
+        pHeight.textContent = pokemon.height_m + "m";
+        divHeight.appendChild(pHeight);
+        divContainer.appendChild(divHeight);
+        checkList.push(data.height_m);
 
-          // Weight
-          var divWeight = document.createElement("div");
-          divWeight.classList.add("box", data.weight_kg,"answer");
-          divWeight.style.animationDelay = "2.5s";
-          var pWeight = document.createElement("p");
-          pWeight.textContent = pokemon.weight_kg + "Kg";
-          divWeight.appendChild(pWeight);
-          divContainer.appendChild(divWeight);
-          checkList.push(data.weight_kg);
+        // Weight
+        var divWeight = document.createElement("div");
+        divWeight.classList.add("box", data.weight_kg, "answer");
+        divWeight.style.animationDelay = "2.5s";
+        var pWeight = document.createElement("p");
+        pWeight.textContent = pokemon.weight_kg + "Kg";
+        divWeight.appendChild(pWeight);
+        divContainer.appendChild(divWeight);
+        checkList.push(data.weight_kg);
 
-          // Legendary
-          var divLegendary = document.createElement("div");
-          divLegendary.classList.add("box", data.is_legendary,"answer");
-          divLegendary.style.animationDelay = "3s";
-          var pLegendary = document.createElement("p");
-          if (pokemon.is_legendary == 0) { pLegendary.textContent = "No" }
-          else { pLegendary.textContent = "Yes" }
-          divLegendary.appendChild(pLegendary);
-          divContainer.appendChild(divLegendary);
-          checkList.push(data.is_legendary);
+        // Legendary
+        var divLegendary = document.createElement("div");
+        divLegendary.classList.add("box", data.is_legendary, "answer");
+        divLegendary.style.animationDelay = "3s";
+        var pLegendary = document.createElement("p");
+        if (pokemon.is_legendary == 0) { pLegendary.textContent = "No" }
+        else { pLegendary.textContent = "Yes" }
+        divLegendary.appendChild(pLegendary);
+        divContainer.appendChild(divLegendary);
+        checkList.push(data.is_legendary);
 
-          // Append all
-          var answersDiv = document.getElementById("answers");
-          // answersDiv.appendChild(divContainer);
-          var firstChild = answersDiv.firstElementChild;
-          answersDiv.insertBefore(divContainer,firstChild.nextSibling)
+        // Append all
+        var answersDiv = document.getElementById("answers");
+        // answersDiv.appendChild(divContainer);
+        var firstChild = answersDiv.firstElementChild;
+        answersDiv.insertBefore(divContainer, firstChild.nextSibling)
 
-          // Remove input
-          var input = document.getElementById("autocomplete-input");
-          input.value = "";
+        // Remove input
+        var input = document.getElementById("autocomplete-input");
+        input.value = "";
 
-          // Remove pokemon from list & dictionary
-          var index = pkmonList.indexOf(pokemon.name);
-          pkmonList.splice(index,1);
-          index = apiPdex.findIndex(item => item.name === pokemon.name);
-          apiPdex.splice(index,1);
+        // Remove pokemon from list & dictionary
+        var index = pkmonList.indexOf(pokemon.name);
+        pkmonList.splice(index, 1);
+        index = apiPdex.findIndex(item => item.name === pokemon.name);
+        apiPdex.splice(index, 1);
 
-          isWinner(checkList);
-        })
+        isWinner(checkList);
+      })
   }
 }
 
-function isWinner(list){
+function isWinner(list) {
   // this function checks if the list of answers are all true in that case is the correct answer
   var allTrue = true;
-  for(var i = 0; i<list.length; i++){
-    if (list[i] !== true){
+  for (var i = 0; i < list.length; i++) {
+    if (list[i] !== true) {
       allTrue = false;
       break;
     }
   }
-  if (allTrue){ // This is the winner
+  if (allTrue) { // This is the winner
     var input = document.getElementById("autocomplete-input");
     input.disabled = true;
     showWinnerMessage();
@@ -204,10 +217,12 @@ function isWinner(list){
 function showWinnerMessage() {
   /* This function Activates the winner popout after 3.75 seconds*/
   var message = document.getElementById("winner-message");
-  setTimeout(function() {
+  setTimeout(function () {
     message.style.display = "block";
   }, 3750);
 
+  var pLastP = document.getElementById("lastPokemon")
+  pLastP.textContent = lastPokemon
 }
 
 function closePopup() {
@@ -310,4 +325,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 });
 
-// TODO: Winner popout (BETTER),Winner popout wait to show until the respose is given, do not reset when reload, save how many tries did it take,
+// TODO: Winner popout (BETTER STYLES), do not reset when reload, save how many tries did it take,
