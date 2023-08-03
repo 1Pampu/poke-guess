@@ -2,6 +2,7 @@
 var apiPdex = "";
 var pkmonList = "";
 var lastPokemon = "";
+var tries = 0
 getLastPokemon()
 getPdex();
 
@@ -193,6 +194,9 @@ function postRequest() {
         index = apiPdex.findIndex(item => item.name === pokemon.name);
         apiPdex.splice(index, 1);
 
+        // Add an attemp to the counter
+        tries++;
+
         isWinner(checkList);
       })
   }
@@ -221,8 +225,10 @@ function showWinnerMessage() {
     message.style.display = "block";
   }, 3750);
 
-  var pLastP = document.getElementById("lastPokemon")
-  pLastP.textContent = lastPokemon
+  var pLastP = document.getElementById("lastPokemon");
+  pLastP.textContent = lastPokemon;
+  var pTries = document.getElementById("tries");
+  pTries.textContent = tries;
 }
 
 function closePopup() {
@@ -325,4 +331,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 });
 
-// TODO: Winner popout (BETTER STYLES), do not reset when reload, save how many tries did it take,
+// TODO: Winner popout (BETTER STYLES), do not reset when reload
