@@ -250,6 +250,10 @@ h3 {
     z-index: 9999;
 }
 
+#winner-message p {
+    font-size: small;
+}
+
 .close-btn {
     position: absolute;
     top: 10px;

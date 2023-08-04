@@ -331,4 +331,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 });
 
-// TODO: Winner popout (BETTER STYLES), do not reset when reload
+// TODO: Winner popout (BETTER STYLES)
