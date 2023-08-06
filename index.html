@@ -38,10 +38,23 @@
                 <h3 id="timer"></h3>
 
                 <div id="winner-message">
-                    Winner!
                     <span class="close-btn" onclick="closePopup()">&times;</span>
-                    <p>Previus pokemon was: <strong id="lastPokemon"></strong></p>
-                    <p>Number of attemps: <strong id="tries"></strong></p>
+                    <h1>Winner!</h1>
+                    <div id="winner-container">
+                        <div id="winner-img-container"><img src="" alt="Pokemon Winner" id="winnerImg"></div>
+                        <div id="winner-text-container">
+                        <p id="winnerName" class="winner"></p>
+                        <p id="winnerNum" class="winner">Nº </p>
+                        <p id="winnerH" class="winner"></p>
+                        <p id="winnerW" class="winner"></p>
+                        <p id="winnerT1" class="winner"></p>
+                        <p id="winnerT2" class="winner"></p>
+                        </div>
+                    </div>
+                    <h2 id="timer-popout"></h2><p>For next pokemon</p>
+                    <p><strong id="wins"></strong> Wins</p>
+                    <p><strong id="tries"> Tries </strong></p>
+                    <p>Previus pokemon: <strong id="lastPokemon"></strong></p>
                 </div>
 
             </div>

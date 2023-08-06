@@ -197,12 +197,12 @@ function postRequest() {
         // Add an attemp to the counter
         tries++;
 
-        isWinner(checkList);
+        isWinner(checkList,pokemon);
       })
   }
 }
 
-function isWinner(list) {
+function isWinner(list,pokemon) {
   // this function checks if the list of answers are all true in that case is the correct answer
   var allTrue = true;
   for (var i = 0; i < list.length; i++) {
@@ -214,16 +214,31 @@ function isWinner(list) {
   if (allTrue) { // This is the winner
     var input = document.getElementById("autocomplete-input");
     input.disabled = true;
-    showWinnerMessage();
+    showWinnerMessage(pokemon);
   }
 }
 
-function showWinnerMessage() {
+function showWinnerMessage(pokemon) {
   /* This function Activates the winner popout after 3.75 seconds*/
   var message = document.getElementById("winner-message");
   setTimeout(function () {
     message.style.display = "block";
   }, 3750);
+
+  var imgWinner = document.getElementById("winnerImg");
+  imgWinner.src = "data:image/png;base64," + pokemon.image;
+  var winnerName = document.getElementById("winnerName");
+  winnerName.textContent = pokemon.name;
+  var winnerNum = document.getElementById("winnerNum");
+  winnerNum.textContent += pokemon.pokedex_number;
+  var winnerH = document.getElementById("winnerH");
+  winnerH.textContent = pokemon.height_m + "m"
+  var winnerW = document.getElementById("winnerW");
+  winnerW.textContent = pokemon.weight_kg + "Kg"
+  var winnerT1 = document.getElementById("winnerT1");
+  winnerT1.textContent = capitalize(pokemon.type1)
+  var winnerT2 = document.getElementById("winnerT2");
+  winnerT2.textContent = capitalize(pokemon.type2)
 
   var pLastP = document.getElementById("lastPokemon");
   pLastP.textContent = lastPokemon;

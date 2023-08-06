@@ -245,9 +245,12 @@ h3 {
     background-color: #f8d95a;
     padding: 20px;
     border-radius: 5px;
-    font-size: 24px;
     text-align: center;
     z-index: 9999;
+}
+
+#winner-message h1{
+    font-size: 24px;
 }
 
 #winner-message p {
@@ -260,6 +263,34 @@ h3 {
     right: 10px;
     font-size: 20px;
     cursor: pointer;
+}
+
+#winnerImg {
+    width: 150px;
+    height: auto;
+    border: 1px solid black;
+}
+
+#winner-container{
+    display:flex;
+}
+
+#winner-img-container{
+    flex:1;
+}
+
+#winner-text-container{
+    flex:1;
+    text-align: left;
+    width: 100px;
+}
+
+#winner-text-container p{
+    font-size: medium;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 15px;
+
 }
 
 /* Footer */
