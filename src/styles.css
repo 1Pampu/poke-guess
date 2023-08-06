@@ -290,7 +290,18 @@ h3 {
     margin-top: 4px;
     margin-bottom: 4px;
     margin-left: 15px;
+}
 
+#timer-popout, #time-left{
+    display: inline-block;
+}
+
+#timer-popout{
+    margin-top: 5px;
+}
+
+#time-left{
+    margin-left: 3px;
 }
 
 /* Footer */

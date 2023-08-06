@@ -219,7 +219,7 @@ function isWinner(list,pokemon) {
 }
 
 function showWinnerMessage(pokemon) {
-  /* This function Activates the winner popout after 3.75 seconds*/
+  // This function Activates the winner popout after 3.75 seconds
   var message = document.getElementById("winner-message");
   setTimeout(function () {
     message.style.display = "block";
@@ -254,11 +254,13 @@ function closePopup() {
 function countDown(timeRemaining) {
   // this function updates the timer
   var timerElement = document.getElementById("timer");
+  var winnerPopTimer = document.getElementById("timer-popout");
 
   var loop = setInterval(() => {
     if (timeRemaining <= 0) {
       clearInterval(loop);
       timerElement.innerHTML = "Reloading Page!"
+      winnerPopTimer.innerHTML = "0:00"
       setTimeout(() => {
         window.location.reload();
       }, 2000);
@@ -266,6 +268,7 @@ function countDown(timeRemaining) {
       var minutes = Math.floor(timeRemaining / 60);
       var seconds = Math.floor(timeRemaining % 60);
       timerElement.innerHTML = `Next Pokemon in ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`
+      winnerPopTimer.innerHTML = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`
     }
     timeRemaining--;
   }, 1000);
