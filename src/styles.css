@@ -245,7 +245,7 @@ h3 {
     background-color: #f8d95a;
     padding: 20px;
     border-radius: 5px;
-    text-align: center;
+    text-align: left;
     z-index: 9999;
 }
 
@@ -294,14 +294,20 @@ h3 {
 
 #timer-popout, #time-left{
     display: inline-block;
+    margin-bottom: 0;
 }
 
 #timer-popout{
     margin-top: 5px;
+    margin-left: 15px;
 }
 
 #time-left{
     margin-left: 3px;
+}
+
+#previus-pokemon{
+    text-align: center;
 }
 
 /* Footer */

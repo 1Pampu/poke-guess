@@ -349,4 +349,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 });
 
-// TODO: Winner popout (BETTER STYLES)
+// TODO: Winner popout (BETTER STYLES), blur the content when u win
