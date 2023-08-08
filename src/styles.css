@@ -230,7 +230,7 @@ button img {
 
 /* Timer */
 
-h3 {
+.timer-tittle {
     font-family: 'Tektur', cursive;
     margin-bottom: 65px;
 }
@@ -251,10 +251,7 @@ h3 {
 
 #winner-message h1{
     font-size: 24px;
-}
-
-#winner-message p {
-    font-size: small;
+    text-align: center;
 }
 
 .close-btn {
@@ -285,8 +282,8 @@ h3 {
     width: 100px;
 }
 
-#winner-text-container p{
-    font-size: medium;
+.winner{
+    font-size: 18px;
     margin-top: 4px;
     margin-bottom: 4px;
     margin-left: 15px;
@@ -310,6 +307,23 @@ h3 {
     text-align: center;
 }
 
+.stats-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.stats-tittle,.stats{
+    text-align: center;
+}
+
+.stats p{
+    margin: 0;
+    font-size: x-large;
+}
+.stats strong{
+    font-size: xx-large;
+}
 /* Footer */
 footer {
     position: fixed;

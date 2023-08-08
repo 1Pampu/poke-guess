@@ -35,7 +35,7 @@
                         <div class="box"><p>Legendary</p></div>
                     </div>
                 </div>
-                <h3 id="timer"></h3>
+                <h3 id="timer" class="timer-tittle"></h3>
 
                 <div id="winner-message">
                     <span class="close-btn" onclick="closePopup()">&times;</span>
@@ -52,8 +52,17 @@
                         </div>
                     </div>
                     <h2 id="timer-popout"> </h2><p id="time-left">For next pokemon</p>
-                    <!-- <p><strong id="wins"></strong> Wins</p> -->
-                    <p><strong id="tries"></strong> Tries </p>
+                    <h3 class="stats-tittle">Statistics</h3>
+                    <div class="stats-container">
+                        <div class="stats">
+                            <strong id="wins">1</strong>
+                            <p>Wins</p>
+                        </div>
+                        <div class="stats">
+                            <strong id="tries"></strong>
+                            <p>Tries</p>
+                        </div>
+                    </div>
                     <p id="previus-pokemon">Previus pokemon: <strong id="lastPokemon"></strong></p>
                 </div>
 
