@@ -244,11 +244,16 @@ function showWinnerMessage(pokemon) {
   pLastP.textContent = lastPokemon;
   var pTries = document.getElementById("tries");
   pTries.textContent = tries;
+
+  // This part makes the blur
+  var container = document.getElementById("container");
+  container.classList.add("blur");
 }
 
 function closePopup() {
   /* This function closes the winner popout */
   document.getElementById("winner-message").style.display = 'none';
+  document.getElementById("container").classList.remove("blur");
 }
 
 function countDown(timeRemaining) {
@@ -349,4 +354,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 });
 
-// TODO:  blur the content when u win, Win count
+// TODO: Win count

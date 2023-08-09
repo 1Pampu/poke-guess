@@ -12,8 +12,9 @@
         <div id="loading-spinner">
             <img src="img/pkball.png" alt="pokeball">
         </div>
+
         <main id="content">
-            <div class="container">
+            <div class="container" id="container">
                 <img src="img/PokeGuess.png" alt="Poke Guess!" id="pokeGuessImg">
                 <p id="warning">Only first gen pokemons!</p>
                 <div class="input-container">
@@ -36,37 +37,37 @@
                     </div>
                 </div>
                 <h3 id="timer" class="timer-tittle"></h3>
-
-                <div id="winner-message">
-                    <span class="close-btn" onclick="closePopup()">&times;</span>
-                    <h1>Winner!</h1>
-                    <div id="winner-container">
-                        <div id="winner-img-container"><img src="" alt="Pokemon Winner" id="winnerImg"></div>
-                        <div id="winner-text-container">
-                        <p id="winnerName" class="winner"></p>
-                        <p id="winnerNum" class="winner">Nº </p>
-                        <p id="winnerH" class="winner"></p>
-                        <p id="winnerW" class="winner"></p>
-                        <p id="winnerT1" class="winner"></p>
-                        <p id="winnerT2" class="winner"></p>
-                        </div>
-                    </div>
-                    <h2 id="timer-popout"> </h2><p id="time-left">For next pokemon</p>
-                    <h3 class="stats-tittle">Statistics</h3>
-                    <div class="stats-container">
-                        <div class="stats">
-                            <strong id="wins">1</strong>
-                            <p>Wins</p>
-                        </div>
-                        <div class="stats">
-                            <strong id="tries"></strong>
-                            <p>Tries</p>
-                        </div>
-                    </div>
-                    <p id="previus-pokemon">Previus pokemon: <strong id="lastPokemon"></strong></p>
-                </div>
-
             </div>
+
+            <div id="winner-message">
+                <span class="close-btn" onclick="closePopup()">&times;</span>
+                <h1>Winner!</h1>
+                <div id="winner-container">
+                    <div id="winner-img-container"><img src="" alt="Pokemon Winner" id="winnerImg"></div>
+                    <div id="winner-text-container">
+                    <p id="winnerName" class="winner"></p>
+                    <p id="winnerNum" class="winner">Nº </p>
+                    <p id="winnerH" class="winner"></p>
+                    <p id="winnerW" class="winner"></p>
+                    <p id="winnerT1" class="winner"></p>
+                    <p id="winnerT2" class="winner"></p>
+                    </div>
+                </div>
+                <h2 id="timer-popout"> </h2><p id="time-left">For next pokemon</p>
+                <h3 class="stats-tittle">Statistics</h3>
+                <div class="stats-container">
+                    <div class="stats">
+                        <strong id="wins">1</strong>
+                        <p>Wins</p>
+                    </div>
+                    <div class="stats">
+                        <strong id="tries"></strong>
+                        <p>Tries</p>
+                    </div>
+                </div>
+                <p id="previus-pokemon">Previus pokemon: <strong id="lastPokemon"></strong></p>
+            </div>
+
             <footer>
                 <a href="https://github.com/1Pampu"><i class="fa-brands fa-github fa-xl" style="color: #000000;"></i></a>
                 <a href="https://www.linkedin.com/in/martin-piampiani/"><i class="fa-brands fa-linkedin fa-xl" style="color: #000000;"></i></a>
