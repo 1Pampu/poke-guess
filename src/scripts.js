@@ -2,7 +2,8 @@
 var apiPdex = "";
 var pkmonList = "";
 var lastPokemon = "";
-var tries = 0
+var tries = 0;
+var wins = parseInt(localStorage.getItem("wins")) || 0;
 getLastPokemon()
 getPdex();
 
@@ -214,6 +215,8 @@ function isWinner(list,pokemon) {
   if (allTrue) { // This is the winner
     var input = document.getElementById("autocomplete-input");
     input.disabled = true;
+    wins++;
+    localStorage.setItem("wins", wins);
     showWinnerMessage(pokemon);
   }
 }
@@ -240,6 +243,9 @@ function showWinnerMessage(pokemon) {
   var winnerT2 = document.getElementById("winnerT2");
   winnerT2.textContent = capitalize(pokemon.type2)
 
+  // Stats
+  var pWins = document.getElementById("wins");
+  pWins.textContent = wins;
   var pLastP = document.getElementById("lastPokemon");
   pLastP.textContent = lastPokemon;
   var pTries = document.getElementById("tries");
@@ -251,13 +257,13 @@ function showWinnerMessage(pokemon) {
 }
 
 function closePopup() {
-  /* This function closes the winner popout */
+  // This function closes the winner popout
   document.getElementById("winner-message").style.display = 'none';
   document.getElementById("container").classList.remove("blur");
 }
 
 function countDown(timeRemaining) {
-  // this function updates the timer
+  // This function updates the timer
   var timerElement = document.getElementById("timer");
   var winnerPopTimer = document.getElementById("timer-popout");
 
