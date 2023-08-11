@@ -195,6 +195,10 @@ button img {
     background-color: rgb(213, 61, 61);
 }
 
+.partial{
+    background-color: orange;
+}
+
 .higher {
     background-color: rgb(213, 61, 61);
 }

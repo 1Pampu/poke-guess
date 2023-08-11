@@ -181,7 +181,6 @@ function postRequest() {
 
         // Append all
         var answersDiv = document.getElementById("answers");
-        // answersDiv.appendChild(divContainer);
         var firstChild = answersDiv.firstElementChild;
         answersDiv.insertBefore(divContainer, firstChild.nextSibling)
 
