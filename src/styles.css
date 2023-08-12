@@ -161,6 +161,10 @@ button img {
     color: black;
 }
 
+.reference{
+    display: none;
+}
+
 .box {
     width: 60px;
     height: 60px;

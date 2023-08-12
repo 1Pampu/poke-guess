@@ -103,6 +103,11 @@ function postRequest() {
         return response.json();
       })
       .then(function (data) {
+        // Show reference
+        if (tries == 0){
+          document.getElementsByClassName("reference")[0].classList.remove("reference");
+        }
+
         var divContainer = document.createElement("div");
         divContainer.classList.add("my-answer");
 
@@ -359,4 +364,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 });
 
-// TODO: fix win spam, put the reference after the first answer
+// TODO: fix win spam
