@@ -4,8 +4,16 @@ var pkmonList = "";
 var lastPokemon = "";
 var tries = 0;
 var wins = parseInt(localStorage.getItem("wins")) || 0;
+var svTime = ""
+var lastWin = localStorage.getItem("lastWin");
+if (lastWin != null){
+  lastWin = JSON.parse(lastWin);
+}else{
+  lastWin = {"pokemon": "", "time":"","tires":""}
+}
 getLastPokemon()
 getPdex();
+
 
 // Functions
 function getPdex() {
@@ -221,16 +229,18 @@ function isWinner(list,pokemon) {
     input.disabled = true;
     wins++;
     localStorage.setItem("wins", wins);
+    lastWin = {"pokemon": pokemon, "time":svTime,"tries": tries}
+    localStorage.setItem("lastWin",JSON.stringify(lastWin))
     showWinnerMessage(pokemon);
   }
 }
 
-function showWinnerMessage(pokemon) {
+function showWinnerMessage(pokemon, time = 3750) {
   // This function Activates the winner popout after 3.75 seconds
   var message = document.getElementById("winner-message");
   setTimeout(function () {
     message.style.display = "block";
-  }, 3750);
+  }, time);
 
   var imgWinner = document.getElementById("winnerImg");
   imgWinner.src = "data:image/png;base64," + pokemon.image;
@@ -253,7 +263,7 @@ function showWinnerMessage(pokemon) {
   var pLastP = document.getElementById("lastPokemon");
   pLastP.textContent = lastPokemon;
   var pTries = document.getElementById("tries");
-  pTries.textContent = tries;
+  pTries.textContent = lastWin.tries;
 
   // This part makes the blur
   var container = document.getElementById("container");
@@ -343,6 +353,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const nowUtc = new Date();
       // Get the str that the server returns
       const serverTimeStr = data.nextPokemon;
+      svTime = serverTimeStr;
+
+      // Check if user already won
+      if (svTime == lastWin.time){
+        var input = document.getElementById("autocomplete-input");
+        input.disabled = true;
+        showWinnerMessage(lastWin.pokemon,1000)
+      }
 
       // Extract compenents to create te Date time
       const year = parseInt(serverTimeStr.slice(0, 4));
@@ -364,4 +382,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 });
 
-// TODO: fix win spam
+// TODO: SAVE TRIES AND SHOW WHEN RELAOD
