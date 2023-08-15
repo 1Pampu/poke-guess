@@ -381,5 +381,3 @@ document.addEventListener("DOMContentLoaded", () => {
       countDown(timeDifferenceSeconds);
     })
 });
-
-// TODO: SAVE TRIES AND SHOW WHEN RELAOD
