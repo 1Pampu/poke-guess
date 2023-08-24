@@ -8,7 +8,7 @@ This repository hosts a Pokémon riddles website, implemented using HTML, CSS, a
 * [Portfolio web](https://1pampu.github.io/my-portfolio/)
 
 ## See live Example
-- [GitHubPagesLink](https://1pampu.github.io/poke-guess/)
+- [PokeGuess!](https://1pampu.github.io/poke-guess/)
 
 ## Hiring
 If you want to hire me, you can email me at piampianimartin@gmail.com for inquiries.
