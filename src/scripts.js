@@ -2,15 +2,16 @@
 var apiPdex = "";
 var pkmonList = "";
 var lastPokemon = "";
-var tries = 0;
+var toDelete = []
+// var tries = 0;
+var tries = localStorage.getItem("tries");
+if (tries != null){tries = JSON.parse(tries)}
+else{tries = {"attempts": 0,"time":"","guess":[]}}
 var wins = parseInt(localStorage.getItem("wins")) || 0;
 var svTime = ""
 var lastWin = localStorage.getItem("lastWin");
-if (lastWin != null){
-  lastWin = JSON.parse(lastWin);
-}else{
-  lastWin = {"pokemon": "", "time":"","tires":""}
-}
+if (lastWin != null){lastWin = JSON.parse(lastWin);}
+else{lastWin = {"pokemon": "", "time":"","tries":""}}
 getLastPokemon()
 getPdex();
 
@@ -29,6 +30,10 @@ function getPdex() {
       apiPdex = data;
       pkmonList = data.map(function (jsonObj) {
         return jsonObj.name;
+      });
+      // Delete if nedeed
+      toDelete.forEach(value => {
+        deletePokemon(value)
       });
     })
 }
@@ -99,6 +104,18 @@ function getPokemonDictionary(pokedexNumber, apiPdex) {
   }
 }
 
+function showReferences(){
+  // This function removes the class reference to the referece in order to show the references
+  document.getElementsByClassName("reference")[0].classList.remove("reference");
+}
+
+function deletePokemon(pokemon){
+  var index = pkmonList.indexOf(pokemon);
+  pkmonList.splice(index, 1);
+  index = apiPdex.findIndex(item => item.name === pokemon);
+  apiPdex.splice(index, 1);
+}
+
 function postRequest() {
   // Function to submit the post request to the server
   pNum = pdexNumberInput();
@@ -112,8 +129,8 @@ function postRequest() {
       })
       .then(function (data) {
         // Show reference
-        if (tries == 0){
-          document.getElementsByClassName("reference")[0].classList.remove("reference");
+        if (tries.attempts == 0){
+          showReferences()
         }
 
         var divContainer = document.createElement("div");
@@ -202,13 +219,13 @@ function postRequest() {
         input.value = "";
 
         // Remove pokemon from list & dictionary
-        var index = pkmonList.indexOf(pokemon.name);
-        pkmonList.splice(index, 1);
-        index = apiPdex.findIndex(item => item.name === pokemon.name);
-        apiPdex.splice(index, 1);
+        deletePokemon(pokemon.name)
 
-        // Add an attemp to the counter
-        tries++;
+        // Add an attemp to the counter, guess and time
+        tries.time = svTime
+        tries.attempts++;
+        tries.guess.push(divContainer.outerHTML)
+        localStorage.setItem("tries",JSON.stringify(tries))
 
         isWinner(checkList,pokemon);
       })
@@ -229,7 +246,7 @@ function isWinner(list,pokemon) {
     input.disabled = true;
     wins++;
     localStorage.setItem("wins", wins);
-    lastWin = {"pokemon": pokemon, "time":svTime,"tries": tries}
+    lastWin = {"pokemon": pokemon, "time":svTime,"tries": tries.attempts}
     localStorage.setItem("lastWin",JSON.stringify(lastWin))
     showWinnerMessage(pokemon);
   }
@@ -355,11 +372,31 @@ document.addEventListener("DOMContentLoaded", () => {
       const serverTimeStr = data.nextPokemon;
       svTime = serverTimeStr;
 
+      // Check if user made tries, if true show the attempts, otherwise delete all
+      if (svTime == tries.time){
+        showReferences();
+        var myAnswers = document.getElementById("answers")
+        for (var i = tries.guess.length - 1; i >= 0; i--) {
+          // add answer
+          myAnswers.insertAdjacentHTML('beforeend',tries.guess[i])
+
+          // get the name of the answer in order to remove it
+          var tempDiv = document.createElement('div');
+          tempDiv.innerHTML = tries.guess[i];
+          var imgElement = tempDiv.querySelector('.my-answer .box.answer img');
+          var titleValue = imgElement.getAttribute('title');
+          toDelete.push(titleValue)
+        }
+      }
+      else{
+        tries = {"attempts": 0,"time":"","guess":[]}
+      }
+
       // Check if user already won
       if (svTime == lastWin.time){
         var input = document.getElementById("autocomplete-input");
         input.disabled = true;
-        showWinnerMessage(lastWin.pokemon,1000)
+        showWinnerMessage(lastWin.pokemon,4000)
       }
 
       // Extract compenents to create te Date time
