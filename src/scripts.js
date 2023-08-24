@@ -1,7 +1,6 @@
 // Global variables and requests
 var apiPdex = "";
 var pkmonList = "";
-var lastPokemon = "";
 var toDelete = []
 // var tries = 0;
 var tries = localStorage.getItem("tries");
@@ -45,7 +44,8 @@ function getLastPokemon() {
       return response.json();
     })
     .then(function (data) {
-      lastPokemon = data.pokemon
+      var pLastP = document.getElementById("lastPokemon");
+      pLastP.textContent = data.pokemon;
     })
 }
 
@@ -277,8 +277,6 @@ function showWinnerMessage(pokemon, time = 3750) {
   // Stats
   var pWins = document.getElementById("wins");
   pWins.textContent = wins;
-  var pLastP = document.getElementById("lastPokemon");
-  pLastP.textContent = lastPokemon;
   var pTries = document.getElementById("tries");
   pTries.textContent = lastWin.tries;
 
