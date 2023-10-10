@@ -2,7 +2,6 @@
 var apiPdex = "";
 var pkmonList = "";
 var toDelete = []
-// var tries = 0;
 var tries = localStorage.getItem("tries");
 if (tries != null){tries = JSON.parse(tries)}
 else{tries = {"attempts": 0,"time":"","guess":[]}}
