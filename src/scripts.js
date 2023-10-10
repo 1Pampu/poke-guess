@@ -1,16 +1,20 @@
 // Global variables and requests
 var apiPdex = "";
 var pkmonList = "";
-var toDelete = []
+var toDelete = [];
+var svTime = "";
+
 var tries = localStorage.getItem("tries");
 if (tries != null){tries = JSON.parse(tries)}
 else{tries = {"attempts": 0,"time":"","guess":[]}}
+
 var wins = parseInt(localStorage.getItem("wins")) || 0;
-var svTime = ""
+
 var lastWin = localStorage.getItem("lastWin");
 if (lastWin != null){lastWin = JSON.parse(lastWin);}
 else{lastWin = {"pokemon": "", "time":"","tries":""}}
-getLastPokemon()
+
+getLastPokemon();
 getPdex();
 
 
