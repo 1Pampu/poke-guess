@@ -126,7 +126,7 @@ function postRequest() {
   if (pNum != null) {
     var pokemon = getPokemonDictionary(pNum, apiPdex);
     if (pkmonList.includes(pokemon.name))
-      var data = { "pokedex_number": pdexNumberInput() }
+      var data = { "pokedex_number": pNum }
     fetch("https://my-poke-api.onrender.com/answer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
       .then(function (response) {
         return response.json();
