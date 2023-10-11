@@ -90,6 +90,7 @@ function pdexNumberInput() {
     var pkmonDictionary = apiPdex.find(function (dic) {
       return dic.name === capitalize(input.value);
     });
+    input.value = "";
     var pkdexNumber = pkmonDictionary.pokedex_number;
     return pkdexNumber
   }
@@ -216,10 +217,6 @@ function postRequest() {
         var answersDiv = document.getElementById("answers");
         var firstChild = answersDiv.firstElementChild;
         answersDiv.insertBefore(divContainer, firstChild.nextSibling)
-
-        // Remove input
-        var input = document.getElementById("autocomplete-input");
-        input.value = "";
 
         // Remove pokemon from list & dictionary
         deletePokemon(pokemon.name)
